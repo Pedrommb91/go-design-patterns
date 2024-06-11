@@ -2,41 +2,41 @@ package factory
 
 import "fmt"
 
-// Product is the interface that all concrete products should implement
-type Product interface {
-	Use() string
+// Vehicle is the interface that all concrete vehicles should implement
+type Vehicle interface {
+	Drive() string
 }
 
-// ConcreteProductA is a concrete implementation of the Product interface
-type ConcreteProductA struct{}
+// Car is a concrete implementation of the Vehicle interface
+type Car struct{}
 
-func (p *ConcreteProductA) Use() string {
-	return "Using Product A"
+func (c *Car) Drive() string {
+	return "Driving a Car"
 }
 
-// ConcreteProductB is a concrete implementation of the Product interface
-type ConcreteProductB struct{}
+// Bike is a concrete implementation of the Vehicle interface
+type Bike struct{}
 
-func (p *ConcreteProductB) Use() string {
-	return "Using Product B"
+func (b *Bike) Drive() string {
+	return "Riding a Bike"
 }
 
-// ProductType is an enumeration of the different types of products
-type ProductType int
+// VehicleType is an enumeration of the different types of vehicles
+type VehicleType int
 
 const (
-	ProductA ProductType = iota
-	ProductB
+	CarType VehicleType = iota
+	BikeType
 )
 
-// CreateProduct is the factory method that creates products based on the given type
-func CreateProduct(productType ProductType) (Product, error) {
-	switch productType {
-	case ProductA:
-		return &ConcreteProductA{}, nil
-	case ProductB:
-		return &ConcreteProductB{}, nil
+// CreateVehicle is the factory method that creates vehicles based on the given type
+func CreateVehicle(vehicleType VehicleType) (Vehicle, error) {
+	switch vehicleType {
+	case CarType:
+		return &Car{}, nil
+	case BikeType:
+		return &Bike{}, nil
 	default:
-		return nil, fmt.Errorf("unknown product type")
+		return nil, fmt.Errorf("unknown vehicle type")
 	}
 }

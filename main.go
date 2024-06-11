@@ -28,23 +28,32 @@ func main() {
 		Build()
 
 	// Factory method
-	_, err := factory.CreateProduct(factory.ProductA)
+	vehicle, err := factory.CreateVehicle(factory.CarType)
 	if err != nil {
 		panic(err)
 	}
+	fmt.Println(vehicle.Drive())
 
 	// Abstract Factory
-	factory1 := factory.GetAbstractFactory("1")
-	productA := factory1.CreateProductA()
-	productB := factory1.CreateProductB()
-	fmt.Println(productA.UseA())
-	fmt.Println(productB.UseB())
+	factory1 := factory.GetFurnitureFactory("modern")
+	if factory1 != nil {
+		chair := factory1.CreateChair()
+		table := factory1.CreateTable()
+		fmt.Println(chair.SitOn())
+		fmt.Println(table.PlaceItems())
+	} else {
+		fmt.Println("Factory not found for style: modern")
+	}
 
-	factory2 := factory.GetAbstractFactory("2")
-	productA = factory2.CreateProductA()
-	productB = factory2.CreateProductB()
-	fmt.Println(productA.UseA())
-	fmt.Println(productB.UseB())
+	factory2 := factory.GetFurnitureFactory("victorian")
+	if factory2 != nil {
+		chair := factory2.CreateChair()
+		table := factory2.CreateTable()
+		fmt.Println(chair.SitOn())
+		fmt.Println(table.PlaceItems())
+	} else {
+		fmt.Println("Factory not found for style: victorian")
+	}
 
 	// Prototype
 	circle := &prototype.Circle{Radius: 10, Color: "red"}

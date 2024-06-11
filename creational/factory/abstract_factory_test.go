@@ -6,28 +6,28 @@ import (
 
 func TestAbstractFactory(t *testing.T) {
 	tests := []struct {
-		factoryType string
-		expectedA   string
-		expectedB   string
+		factoryStyle  string
+		expectedChair string
+		expectedTable string
 	}{
-		{"1", "Using Product A1", "Using Product B1"},
-		{"2", "Using Product A2", "Using Product B2"},
+		{"modern", "Sitting on a Modern Chair", "Placing items on a Modern Table"},
+		{"victorian", "Sitting on a Victorian Chair", "Placing items on a Victorian Table"},
 	}
 
 	for _, test := range tests {
-		factory := GetAbstractFactory(test.factoryType)
+		factory := GetFurnitureFactory(test.factoryStyle)
 		if factory == nil {
-			t.Fatalf("expected a valid factory for type %v, but got nil", test.factoryType)
+			t.Fatalf("expected a valid factory for style %v, but got nil", test.factoryStyle)
 		}
 
-		productA := factory.CreateProductA()
-		if productA.UseA() != test.expectedA {
-			t.Errorf("expected productA use to be %v, but got %v", test.expectedA, productA.UseA())
+		chair := factory.CreateChair()
+		if chair.SitOn() != test.expectedChair {
+			t.Errorf("expected chair sit to be %v, but got %v", test.expectedChair, chair.SitOn())
 		}
 
-		productB := factory.CreateProductB()
-		if productB.UseB() != test.expectedB {
-			t.Errorf("expected productB use to be %v, but got %v", test.expectedB, productB.UseB())
+		table := factory.CreateTable()
+		if table.PlaceItems() != test.expectedTable {
+			t.Errorf("expected table place items to be %v, but got %v", test.expectedTable, table.PlaceItems())
 		}
 	}
 }

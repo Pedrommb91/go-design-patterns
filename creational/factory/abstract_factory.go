@@ -1,76 +1,76 @@
 package factory
 
-// AbstractProductA is the interface for products in the first family
-type AbstractProductA interface {
-	UseA() string
+// Chair is the interface for chair products
+type Chair interface {
+	SitOn() string
 }
 
-// AbstractProductB is the interface for products in the second family
-type AbstractProductB interface {
-	UseB() string
+// Table is the interface for table products
+type Table interface {
+	PlaceItems() string
 }
 
-// ConcreteProductA1 is a concrete implementation of AbstractProductA
-type ConcreteProductA1 struct{}
+// ModernChair is a concrete implementation of Chair
+type ModernChair struct{}
 
-func (p *ConcreteProductA1) UseA() string {
-	return "Using Product A1"
+func (c *ModernChair) SitOn() string {
+	return "Sitting on a Modern Chair"
 }
 
-// ConcreteProductA2 is a concrete implementation of AbstractProductA
-type ConcreteProductA2 struct{}
+// VictorianChair is a concrete implementation of Chair
+type VictorianChair struct{}
 
-func (p *ConcreteProductA2) UseA() string {
-	return "Using Product A2"
+func (c *VictorianChair) SitOn() string {
+	return "Sitting on a Victorian Chair"
 }
 
-// ConcreteProductB1 is a concrete implementation of AbstractProductB
-type ConcreteProductB1 struct{}
+// ModernTable is a concrete implementation of Table
+type ModernTable struct{}
 
-func (p *ConcreteProductB1) UseB() string {
-	return "Using Product B1"
+func (t *ModernTable) PlaceItems() string {
+	return "Placing items on a Modern Table"
 }
 
-// ConcreteProductB2 is a concrete implementation of AbstractProductB
-type ConcreteProductB2 struct{}
+// VictorianTable is a concrete implementation of Table
+type VictorianTable struct{}
 
-func (p *ConcreteProductB2) UseB() string {
-	return "Using Product B2"
+func (t *VictorianTable) PlaceItems() string {
+	return "Placing items on a Victorian Table"
 }
 
-// AbstractFactory is the interface for the abstract factory
-type AbstractFactory interface {
-	CreateProductA() AbstractProductA
-	CreateProductB() AbstractProductB
+// FurnitureFactory is the interface for the abstract factory
+type FurnitureFactory interface {
+	CreateChair() Chair
+	CreateTable() Table
 }
 
-func GetAbstractFactory(name string) AbstractFactory {
-	if name == "1" {
-		return &ConcreteFactory1{}
-	} else if name == "2" {
-		return &ConcreteFactory2{}
+func GetFurnitureFactory(style string) FurnitureFactory {
+	if style == "modern" {
+		return &ModernFurnitureFactory{}
+	} else if style == "victorian" {
+		return &VictorianFurnitureFactory{}
 	}
 	return nil
 }
 
-// ConcreteFactory1 is a concrete implementation of AbstractFactory
-type ConcreteFactory1 struct{}
+// ModernFurnitureFactory is a concrete implementation of FurnitureFactory
+type ModernFurnitureFactory struct{}
 
-func (f *ConcreteFactory1) CreateProductA() AbstractProductA {
-	return &ConcreteProductA1{}
+func (f *ModernFurnitureFactory) CreateChair() Chair {
+	return &ModernChair{}
 }
 
-func (f *ConcreteFactory1) CreateProductB() AbstractProductB {
-	return &ConcreteProductB1{}
+func (f *ModernFurnitureFactory) CreateTable() Table {
+	return &ModernTable{}
 }
 
-// ConcreteFactory2 is a concrete implementation of AbstractFactory
-type ConcreteFactory2 struct{}
+// VictorianFurnitureFactory is a concrete implementation of FurnitureFactory
+type VictorianFurnitureFactory struct{}
 
-func (f *ConcreteFactory2) CreateProductA() AbstractProductA {
-	return &ConcreteProductA2{}
+func (f *VictorianFurnitureFactory) CreateChair() Chair {
+	return &VictorianChair{}
 }
 
-func (f *ConcreteFactory2) CreateProductB() AbstractProductB {
-	return &ConcreteProductB2{}
+func (f *VictorianFurnitureFactory) CreateTable() Table {
+	return &VictorianTable{}
 }

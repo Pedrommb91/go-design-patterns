@@ -4,29 +4,29 @@ import (
 	"testing"
 )
 
-func TestCreateProduct(t *testing.T) {
+func TestCreateVehicle(t *testing.T) {
 	tests := []struct {
-		productType ProductType
+		vehicleType VehicleType
 		expected    string
 		shouldError bool
 	}{
-		{ProductA, "Using Product A", false},
-		{ProductB, "Using Product B", false},
-		{ProductType(999), "", true},
+		{CarType, "Driving a Car", false},
+		{BikeType, "Riding a Bike", false},
+		{VehicleType(999), "", true},
 	}
 
 	for _, test := range tests {
-		product, err := CreateProduct(test.productType)
+		vehicle, err := CreateVehicle(test.vehicleType)
 		if test.shouldError {
 			if err == nil {
-				t.Errorf("expected an error for product type %v, but got none", test.productType)
+				t.Errorf("expected an error for vehicle type %v, but got none", test.vehicleType)
 			}
 		} else {
 			if err != nil {
-				t.Errorf("did not expect an error for product type %v, but got %v", test.productType, err)
+				t.Errorf("did not expect an error for vehicle type %v, but got %v", test.vehicleType, err)
 			}
-			if product.Use() != test.expected {
-				t.Errorf("expected product use to be %v, but got %v", test.expected, product.Use())
+			if vehicle.Drive() != test.expected {
+				t.Errorf("expected vehicle drive to be %v, but got %v", test.expected, vehicle.Drive())
 			}
 		}
 	}
