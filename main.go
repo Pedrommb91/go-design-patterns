@@ -19,8 +19,6 @@ func main() {
 	_ = builder.NewBuilder(builder.Concrete).
 		SetName("Product").
 		SetValue(100).
-		SetColor("Red").
-		SetSize("Large").
 		Build()
 
 }

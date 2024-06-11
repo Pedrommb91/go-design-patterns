@@ -20,28 +20,10 @@ func TestConcreteBuilder_SetValue(t *testing.T) {
 	}
 }
 
-func TestConcreteBuilder_SetColor(t *testing.T) {
-	product := NewBuilder(Concrete).SetColor("Red").Build()
-
-	if product.color != "Red" {
-		t.Errorf("Expected color to be 'Red', but got %s", product.color)
-	}
-}
-
-func TestConcreteBuilder_SetSize(t *testing.T) {
-	product := NewBuilder(Concrete).SetSize("Large").Build()
-
-	if product.size != "Large" {
-		t.Errorf("Expected size to be 'Large', but got %s", product.size)
-	}
-}
-
 func TestConcreteBuilder_Build(t *testing.T) {
 	product := NewBuilder(Concrete).
 		SetName("TestName").
 		SetValue(100).
-		SetColor("Red").
-		SetSize("Large").
 		Build()
 
 	if product.name != "TestName" {
@@ -50,13 +32,5 @@ func TestConcreteBuilder_Build(t *testing.T) {
 
 	if product.value != 100 {
 		t.Errorf("Expected value to be 100, but got %d", product.value)
-	}
-
-	if product.color != "Red" {
-		t.Errorf("Expected color to be 'Red', but got %s", product.color)
-	}
-
-	if product.size != "Large" {
-		t.Errorf("Expected size to be 'Large', but got %s", product.size)
 	}
 }

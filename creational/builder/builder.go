@@ -3,15 +3,11 @@ package builder
 type Product struct {
 	name  string
 	value int
-	color string
-	size  string
 }
 
 type Builder interface {
 	SetName(name string) Builder
 	SetValue(value int) Builder
-	SetColor(color string) Builder
-	SetSize(size string) Builder
 	Build() Product
 }
 
@@ -43,16 +39,6 @@ func (b *ConcreteBuilder) SetName(name string) Builder {
 
 func (b *ConcreteBuilder) SetValue(value int) Builder {
 	b.product.value = value
-	return b
-}
-
-func (b *ConcreteBuilder) SetColor(color string) Builder {
-	b.product.color = color
-	return b
-}
-
-func (b *ConcreteBuilder) SetSize(size string) Builder {
-	b.product.size = size
 	return b
 }
 
