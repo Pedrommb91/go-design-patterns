@@ -5,6 +5,8 @@ import (
 	"Pedrommb91/go-design-patterns/creational/factory"
 	"Pedrommb91/go-design-patterns/creational/prototype"
 	"Pedrommb91/go-design-patterns/creational/singleton"
+
+	"Pedrommb91/go-design-patterns/structural/adapter"
 	"fmt"
 )
 
@@ -63,4 +65,12 @@ func main() {
 	rectangle := &prototype.Rectangle{Width: 20, Height: 10, Color: "blue"}
 	cloneRectangle := rectangle.Clone().(*prototype.Rectangle)
 	fmt.Printf("Original Rectangle: %+v, Clone Rectangle: %+v\n", rectangle, cloneRectangle)
+
+	// Adapter
+	usbDevice := &adapter.USBDevice{}
+	adapter.ConnectDeviceToComputer(usbDevice)
+
+	hdmiDevice := &adapter.HDMIDevice{}
+	hdmiToUSBAdapter := &adapter.HDMIToUSBAdapter{HDMIDevice: hdmiDevice}
+	adapter.ConnectDeviceToComputer(hdmiToUSBAdapter)
 }
