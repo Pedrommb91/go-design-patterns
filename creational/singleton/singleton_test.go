@@ -1,6 +1,6 @@
 // singleton_test.go
 
-package creational
+package singleton
 
 import (
 	"sync"

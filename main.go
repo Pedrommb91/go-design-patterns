@@ -1,15 +1,26 @@
 package main
 
-import "Pedrommb91/go-design-patterns/creational"
+import (
+	"Pedrommb91/go-design-patterns/creational/builder"
+	"Pedrommb91/go-design-patterns/creational/singleton"
+)
 
 func main() {
 	// Singleton
-	_ = creational.GetInstance()
+	_ = singleton.GetInstance()
 
 	// Simple Builder
-	builder := creational.NewBuilder()
-	builder.SetName("Product")
-	builder.SetValue(100)
-	_ = builder.Build()
+	_ = builder.NewSimpleBuilder().
+		SetName("Product").
+		SetValue(100).
+		Build()
+
+	// Builder
+	_ = builder.NewBuilder(builder.Concrete).
+		SetName("Product").
+		SetValue(100).
+		SetColor("Red").
+		SetSize("Large").
+		Build()
 
 }

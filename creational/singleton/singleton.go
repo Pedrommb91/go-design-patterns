@@ -4,7 +4,7 @@
 // The Singleton pattern ensures that a class has only one instance and provides a global point of access to it.
 // This implementation uses sync.Once to ensure that the instance is created only once in a thread-safe manner.
 
-package creational
+package singleton
 
 import "sync"
 
