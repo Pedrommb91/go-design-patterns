@@ -11,20 +11,32 @@ type Builder interface {
 	Build() Product
 }
 
-type ConcreteBuilder struct {
+type DefaultBuilder struct {
+	product Product
+}
+
+type CustomBuilder struct {
 	product Product
 }
 
 type BuilderType int
 
 const (
-	Concrete BuilderType = iota
+	Default BuilderType = iota
+	Custom
 )
 
 func NewBuilder(builderType BuilderType) Builder {
 	switch builderType {
-	case Concrete:
-		return &ConcreteBuilder{
+	case Default:
+		return &DefaultBuilder{
+			product: Product{
+				name:  "Default",
+				value: 0,
+			},
+		}
+	case Custom:
+		return &CustomBuilder{
 			product: Product{},
 		}
 	default:
@@ -32,16 +44,30 @@ func NewBuilder(builderType BuilderType) Builder {
 	}
 }
 
-func (b *ConcreteBuilder) SetName(name string) Builder {
+func (b *DefaultBuilder) SetName(name string) Builder {
 	b.product.name = name
 	return b
 }
 
-func (b *ConcreteBuilder) SetValue(value int) Builder {
+func (b *DefaultBuilder) SetValue(value int) Builder {
 	b.product.value = value
 	return b
 }
 
-func (b *ConcreteBuilder) Build() Product {
+func (b *DefaultBuilder) Build() Product {
+	return b.product
+}
+
+func (b *CustomBuilder) SetName(name string) Builder {
+	b.product.name = name
+	return b
+}
+
+func (b *CustomBuilder) SetValue(value int) Builder {
+	b.product.value = value
+	return b
+}
+
+func (b *CustomBuilder) Build() Product {
 	return b.product
 }

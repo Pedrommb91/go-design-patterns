@@ -4,33 +4,44 @@ import (
 	"testing"
 )
 
-func TestConcreteBuilder_SetName(t *testing.T) {
-	product := NewBuilder(Concrete).SetName("TestName").Build()
+func TestDefaultBuilder(t *testing.T) {
+	product := NewBuilder(Default).Build()
 
-	if product.name != "TestName" {
-		t.Errorf("Expected name to be 'TestName', but got %s", product.name)
+	if product.name != "Default" {
+		t.Errorf("Expected product name to be 'Default', got '%s'", product.name)
+	}
+
+	if product.value != 0 {
+		t.Errorf("Expected product value to be 0, got %d", product.value)
 	}
 }
 
-func TestConcreteBuilder_SetValue(t *testing.T) {
-	product := NewBuilder(Concrete).SetValue(100).Build()
+func TestCustomBuilder(t *testing.T) {
+	builder := NewBuilder(Custom)
+	product := builder.SetName("CustomProduct").SetValue(20).Build()
 
-	if product.value != 100 {
-		t.Errorf("Expected value to be 100, but got %d", product.value)
+	if product.name != "CustomProduct" {
+		t.Errorf("Expected product name to be 'CustomProduct', got '%s'", product.name)
+	}
+
+	if product.value != 20 {
+		t.Errorf("Expected product value to be 20, got %d", product.value)
 	}
 }
 
-func TestConcreteBuilder_Build(t *testing.T) {
-	product := NewBuilder(Concrete).
-		SetName("TestName").
-		SetValue(100).
-		Build()
-
-	if product.name != "TestName" {
-		t.Errorf("Expected name to be 'TestName', but got %s", product.name)
+func TestNewBuilder(t *testing.T) {
+	defaultBuilder := NewBuilder(Default)
+	if defaultBuilder == nil {
+		t.Error("Expected defaultBuilder to be non-nil")
 	}
 
-	if product.value != 100 {
-		t.Errorf("Expected value to be 100, but got %d", product.value)
+	customBuilder := NewBuilder(Custom)
+	if customBuilder == nil {
+		t.Error("Expected customBuilder to be non-nil")
+	}
+
+	invalidBuilder := NewBuilder(BuilderType(999))
+	if invalidBuilder != nil {
+		t.Error("Expected invalidBuilder to be nil")
 	}
 }

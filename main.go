@@ -16,7 +16,10 @@ func main() {
 		Build()
 
 	// Builder
-	_ = builder.NewBuilder(builder.Concrete).
+	_ = builder.NewBuilder(builder.Default).
+		Build()
+
+	_ = builder.NewBuilder(builder.Custom).
 		SetName("Product").
 		SetValue(100).
 		Build()
