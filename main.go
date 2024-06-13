@@ -15,6 +15,7 @@ import (
 	"Pedrommb91/go-design-patterns/structural/proxy"
 
 	"Pedrommb91/go-design-patterns/behavioral/chain"
+	"Pedrommb91/go-design-patterns/behavioral/command"
 
 	"fmt"
 )
@@ -190,4 +191,14 @@ func main() {
 			fmt.Printf("Request for $%.2f has been denied.\n", amount)
 		}
 	}
+
+	// Command
+	light := &command.Light{}
+	switcher := command.NewSwitch()
+	switcher.StoreCommand("on", &command.TurnOnCommand{Light: light})
+	switcher.StoreCommand("off", &command.TurnOffCommand{Light: light})
+
+	// Execute the commands
+	switcher.ExecuteCommand("on")
+	switcher.ExecuteCommand("off")
 }
