@@ -8,6 +8,7 @@ import (
 
 	"Pedrommb91/go-design-patterns/structural/adapter"
 	"Pedrommb91/go-design-patterns/structural/bridge"
+	"Pedrommb91/go-design-patterns/structural/composite"
 	"fmt"
 )
 
@@ -89,4 +90,21 @@ func main() {
 	advancedRemote.TurnOn()
 	advancedRemote.Mute()
 	advancedRemote.TurnOff()
+
+	// Composite
+	file1 := &composite.File{Name: "File 1"}
+	file2 := &composite.File{Name: "File 2"}
+	file3 := &composite.File{Name: "File 3"}
+
+	dir1 := &composite.Directory{Name: "Directory 1"}
+	dir1.Add(file1)
+	dir1.Add(file2)
+
+	dir2 := &composite.Directory{Name: "Directory 2"}
+	dir2.Add(dir1)
+	dir2.Add(file3)
+
+	fmt.Println(file1.Operation())
+	fmt.Println(dir1.Operation())
+	fmt.Println(dir2.Operation())
 }
