@@ -13,6 +13,9 @@ import (
 	"Pedrommb91/go-design-patterns/structural/facade"
 	"Pedrommb91/go-design-patterns/structural/flyweight"
 	"Pedrommb91/go-design-patterns/structural/proxy"
+
+	"Pedrommb91/go-design-patterns/behavioral/chain"
+
 	"fmt"
 )
 
@@ -165,4 +168,26 @@ func main() {
 	fmt.Println(securedDoor.Open("invalid")) // Output: Access denied
 	fmt.Println(securedDoor.Open("secret"))  // Output: Lab door opened
 	fmt.Println(securedDoor.Close())         // Output: Lab door closed
+
+	// ++++++++++++++++++++++++++++++ Behavioral ++++++++++++++++++++++++++++++
+	// Chain of Responsibility
+	approver := &chain.BaseApprover{}
+	manager := &chain.Manager{}
+	director := &chain.Director{}
+	vicePresident := &chain.VicePresident{}
+	ceo := &chain.CEO{}
+
+	// Set up the chain of responsibility
+	approver.SetNext(manager).SetNext(director).SetNext(vicePresident).SetNext(ceo)
+
+	// Various requests
+	expenses := []float64{500, 1500, 5500, 10500}
+	for _, amount := range expenses {
+		approved := approver.ApproveRequest(amount)
+		if approved {
+			fmt.Printf("Request for $%.2f has been approved.\n", amount)
+		} else {
+			fmt.Printf("Request for $%.2f has been denied.\n", amount)
+		}
+	}
 }
