@@ -7,10 +7,12 @@ import (
 	"Pedrommb91/go-design-patterns/creational/singleton"
 
 	"Pedrommb91/go-design-patterns/structural/adapter"
+	"Pedrommb91/go-design-patterns/structural/bridge"
 	"fmt"
 )
 
 func main() {
+	// ++++++++++++++++++++++++++++++ Creational ++++++++++++++++++++++++++++++
 	// Singleton
 	_ = singleton.GetInstance()
 
@@ -66,6 +68,7 @@ func main() {
 	cloneRectangle := rectangle.Clone().(*prototype.Rectangle)
 	fmt.Printf("Original Rectangle: %+v, Clone Rectangle: %+v\n", rectangle, cloneRectangle)
 
+	// ++++++++++++++++++++++++++++++ Structural ++++++++++++++++++++++++++++++
 	// Adapter
 	usbDevice := &adapter.USBDevice{}
 	adapter.ConnectDeviceToComputer(usbDevice)
@@ -73,4 +76,17 @@ func main() {
 	hdmiDevice := &adapter.HDMIDevice{}
 	hdmiToUSBAdapter := &adapter.HDMIToUSBAdapter{HDMIDevice: hdmiDevice}
 	adapter.ConnectDeviceToComputer(hdmiToUSBAdapter)
+
+	// Bridge
+	tv := &bridge.TV{}
+	radio := &bridge.Radio{}
+
+	remote := &bridge.RemoteControl{Device: tv}
+	remote.TurnOn()
+	remote.TurnOff()
+
+	advancedRemote := &bridge.AdvancedRemoteControl{RemoteControl: bridge.RemoteControl{Device: radio}}
+	advancedRemote.TurnOn()
+	advancedRemote.Mute()
+	advancedRemote.TurnOff()
 }
