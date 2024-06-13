@@ -11,6 +11,7 @@ import (
 	"Pedrommb91/go-design-patterns/structural/composite"
 	"Pedrommb91/go-design-patterns/structural/decorator"
 	"Pedrommb91/go-design-patterns/structural/facade"
+	"Pedrommb91/go-design-patterns/structural/flyweight"
 	"fmt"
 )
 
@@ -135,4 +136,24 @@ func main() {
 	homeTheater.WatchMovie("Pulp Fiction")
 	homeTheater.EndMovie()
 
+	// flyweight
+	forest := flyweight.NewForest()
+
+	// Planting 5 pine trees in the forest at different locations
+	forest.PlantTree(1, 2, 5, 2, "Pine", "Green", "Pine Texture")
+	forest.PlantTree(2, 3, 5, 2, "Pine", "Green", "Pine Texture")
+	forest.PlantTree(3, 4, 5, 2, "Pine", "Green", "Pine Texture")
+	forest.PlantTree(4, 5, 5, 2, "Pine", "Green", "Pine Texture")
+	forest.PlantTree(5, 6, 5, 2, "Pine", "Green", "Pine Texture")
+
+	// Planting 3 oak trees in the forest at different locations
+	forest.PlantTree(6, 7, 10, 5, "Oak", "Brown", "Oak Texture")
+	forest.PlantTree(7, 8, 10, 5, "Oak", "Brown", "Oak Texture")
+	forest.PlantTree(8, 9, 10, 5, "Oak", "Brown", "Oak Texture")
+
+	// Assuming we have a canvas to draw on
+	canvas := &flyweight.Canvas{}
+
+	// Drawing all trees in the forest
+	forest.Draw(canvas)
 }
