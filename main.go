@@ -16,6 +16,7 @@ import (
 
 	"Pedrommb91/go-design-patterns/behavioral/chain"
 	"Pedrommb91/go-design-patterns/behavioral/command"
+	"Pedrommb91/go-design-patterns/behavioral/interpreter"
 
 	"fmt"
 )
@@ -201,4 +202,15 @@ func main() {
 	// Execute the commands
 	switcher.ExecuteCommand("on")
 	switcher.ExecuteCommand("off")
+
+	// Interpreter
+	ctx := &interpreter.Context{
+		VariableValues: map[string]int{"x": 5, "y": 10},
+	}
+	expression := &interpreter.AddExpression{
+		Left:  &interpreter.VariableExpression{Name: "x"},
+		Right: &interpreter.VariableExpression{Name: "y"},
+	}
+	result := expression.Interpret(ctx)
+	fmt.Println(result) // Output: 15
 }
