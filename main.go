@@ -10,6 +10,7 @@ import (
 	"Pedrommb91/go-design-patterns/structural/bridge"
 	"Pedrommb91/go-design-patterns/structural/composite"
 	"Pedrommb91/go-design-patterns/structural/decorator"
+	"Pedrommb91/go-design-patterns/structural/facade"
 	"fmt"
 )
 
@@ -122,4 +123,16 @@ func main() {
 	sugarCoffee := &decorator.SugarDecorator{}
 	sugarCoffee.Decorate(milkCoffee)
 	fmt.Printf("%s: $%.2f\n", sugarCoffee.Description(), sugarCoffee.Cost()) // Output: Simple Coffee, Milk, Sugar: $2.75
+
+	// Facade
+	amplifier := &facade.Amplifier{}
+	dvdPlayer := &facade.DvdPlayer{}
+	projector := &facade.Projector{}
+	theaterLights := &facade.TheaterLights{}
+	screen := &facade.Screen{}
+
+	homeTheater := facade.NewHomeTheaterFacade(amplifier, dvdPlayer, projector, theaterLights, screen)
+	homeTheater.WatchMovie("Pulp Fiction")
+	homeTheater.EndMovie()
+
 }
