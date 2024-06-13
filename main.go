@@ -12,6 +12,7 @@ import (
 	"Pedrommb91/go-design-patterns/structural/decorator"
 	"Pedrommb91/go-design-patterns/structural/facade"
 	"Pedrommb91/go-design-patterns/structural/flyweight"
+	"Pedrommb91/go-design-patterns/structural/proxy"
 	"fmt"
 )
 
@@ -156,4 +157,12 @@ func main() {
 
 	// Drawing all trees in the forest
 	forest.Draw(canvas)
+
+	// Proxy
+	door := &proxy.LabDoor{}
+	securedDoor := proxy.NewSecurity(door, "secret")
+
+	fmt.Println(securedDoor.Open("invalid")) // Output: Access denied
+	fmt.Println(securedDoor.Open("secret"))  // Output: Lab door opened
+	fmt.Println(securedDoor.Close())         // Output: Lab door closed
 }
