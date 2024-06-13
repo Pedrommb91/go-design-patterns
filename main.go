@@ -9,6 +9,7 @@ import (
 	"Pedrommb91/go-design-patterns/structural/adapter"
 	"Pedrommb91/go-design-patterns/structural/bridge"
 	"Pedrommb91/go-design-patterns/structural/composite"
+	"Pedrommb91/go-design-patterns/structural/decorator"
 	"fmt"
 )
 
@@ -107,4 +108,18 @@ func main() {
 	fmt.Println(file1.Operation())
 	fmt.Println(dir1.Operation())
 	fmt.Println(dir2.Operation())
+
+	// Decorator
+	// Create a simple coffee
+	coffee := &decorator.SimpleCoffee{}
+
+	// Decorate it with Milk
+	milkCoffee := &decorator.MilkDecorator{}
+	milkCoffee.Decorate(coffee)
+	fmt.Printf("%s: $%.2f\n", milkCoffee.Description(), milkCoffee.Cost()) // Output: Simple Coffee, Milk: $2.50
+
+	// Decorate it with Sugar
+	sugarCoffee := &decorator.SugarDecorator{}
+	sugarCoffee.Decorate(milkCoffee)
+	fmt.Printf("%s: $%.2f\n", sugarCoffee.Description(), sugarCoffee.Cost()) // Output: Simple Coffee, Milk, Sugar: $2.75
 }
