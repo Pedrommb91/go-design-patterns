@@ -17,6 +17,7 @@ import (
 	"Pedrommb91/go-design-patterns/behavioral/chain"
 	"Pedrommb91/go-design-patterns/behavioral/command"
 	"Pedrommb91/go-design-patterns/behavioral/interpreter"
+	"Pedrommb91/go-design-patterns/behavioral/iterator"
 
 	"fmt"
 )
@@ -213,4 +214,20 @@ func main() {
 	}
 	result := expression.Interpret(ctx)
 	fmt.Println(result) // Output: 15
+
+	// Iterator
+	bookShelf := &iterator.BookShelf{
+		Books: []iterator.Book{
+			{Title: "Design Patterns", Author: "Erich Gamma"},
+			{Title: "Clean Code", Author: "Robert C. Martin"},
+			{Title: "Refactoring", Author: "Martin Fowler"},
+		},
+	}
+
+	it := bookShelf.CreateIterator()
+	for it.HasNext() {
+		book := it.Next().(iterator.Book)
+		fmt.Printf("Book: %s, Author: %s\n", book.Title, book.Author)
+	}
+
 }
