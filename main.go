@@ -19,6 +19,7 @@ import (
 	"Pedrommb91/go-design-patterns/behavioral/interpreter"
 	"Pedrommb91/go-design-patterns/behavioral/iterator"
 	"Pedrommb91/go-design-patterns/behavioral/mediator"
+	"Pedrommb91/go-design-patterns/behavioral/memento"
 
 	"fmt"
 )
@@ -252,5 +253,33 @@ func main() {
 	if passengerPlane2.Land() {
 		fmt.Println("Passenger Plane 2 has landed.")
 	}
+
+	// Memento
+	editor := memento.Editor{}
+	history := memento.History{}
+
+	editor.SetContent("First State")
+	history.Push(editor.CreateState())
+
+	editor.SetContent("Second State")
+	history.Push(editor.CreateState())
+
+	editor.SetContent("Third State")
+
+	fmt.Println(editor.GetContent())
+
+	// Restore to the second state
+	secondState := history.Pop()
+	if secondState != nil {
+		editor.Restore(secondState)
+	}
+	fmt.Println(editor.GetContent()) // Output: Second State
+
+	// Restore to the first state
+	firstState := history.Pop()
+	if firstState != nil {
+		editor.Restore(firstState)
+	}
+	fmt.Println(editor.GetContent()) // Output: First State
 
 }
