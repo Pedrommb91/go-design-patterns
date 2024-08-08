@@ -22,6 +22,7 @@ import (
 	"Pedrommb91/go-design-patterns/behavioral/memento"
 	"Pedrommb91/go-design-patterns/behavioral/observer"
 	"Pedrommb91/go-design-patterns/behavioral/state"
+	"Pedrommb91/go-design-patterns/behavioral/strategy"
 
 	"fmt"
 )
@@ -307,4 +308,23 @@ func main() {
 	trafficLight.Change() // The traffic light is red and will change to green.
 	trafficLight.Change() // The traffic light is green and will change to yellow.
 	trafficLight.Change() // The traffic light is yellow and will change to red.
+
+	// Strategy
+	shoppingCart := strategy.ShoppingCart{}
+
+	// Pay with credit card
+	creditCardPayment := &strategy.CreditCardStrategy{
+		CardNumber: "1234 5678 9012 3456",
+		CVV:        "123",
+		ExpiryDate: "06/26",
+	}
+	shoppingCart.SetPaymentStrategy(creditCardPayment)
+	fmt.Println(shoppingCart.Checkout(100.0))
+
+	// Pay with PayPal
+	payPalPayment := &strategy.PayPalStrategy{
+		Email: "user@example.com",
+	}
+	shoppingCart.SetPaymentStrategy(payPalPayment)
+	fmt.Println(shoppingCart.Checkout(75.0))
 }
