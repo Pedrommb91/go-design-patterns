@@ -15,7 +15,7 @@ func TestBookShelfIterator(t *testing.T) {
 	iterator := bookShelf.CreateIterator()
 
 	for i := 0; iterator.HasNext(); i++ {
-		book := iterator.Next().(Book)
+		book := iterator.Next()
 		if book != books[i] {
 			t.Errorf("Expected book %v, got %v", books[i], book)
 		}
@@ -25,7 +25,7 @@ func TestBookShelfIterator(t *testing.T) {
 		t.Errorf("Expected false, got true")
 	}
 
-	if next := iterator.Next(); next != nil {
-		t.Errorf("Expected nil, got %v", next)
+	if next := iterator.Next(); next != (Book{}) {
+		t.Errorf("Expected empty sturct, got %v", next)
 	}
 }

@@ -3,7 +3,7 @@ package iterator
 // Iterator provides a way to access the elements of an aggregate object sequentially without exposing its underlying representation.
 type Iterator interface {
 	HasNext() bool
-	Next() interface{}
+	Next() Book
 }
 
 // Collection defines a standard collection that can create an Iterator.
@@ -41,12 +41,12 @@ func (i *BookShelfIterator) HasNext() bool {
 	return i.current < len(i.bookShelf.Books)
 }
 
-// Next returns the next item in the collection.
-func (i *BookShelfIterator) Next() interface{} {
+// Next returns the next book in the collection.
+func (i *BookShelfIterator) Next() Book {
 	if i.HasNext() {
 		book := i.bookShelf.Books[i.current]
 		i.current++
 		return book
 	}
-	return nil
+	return Book{}
 }

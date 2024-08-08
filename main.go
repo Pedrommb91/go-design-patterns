@@ -226,7 +226,7 @@ func main() {
 
 	it := bookShelf.CreateIterator()
 	for it.HasNext() {
-		book := it.Next().(iterator.Book)
+		book := it.Next()
 		fmt.Printf("Book: %s, Author: %s\n", book.Title, book.Author)
 	}
 
