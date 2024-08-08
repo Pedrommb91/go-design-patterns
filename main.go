@@ -20,6 +20,7 @@ import (
 	"Pedrommb91/go-design-patterns/behavioral/iterator"
 	"Pedrommb91/go-design-patterns/behavioral/mediator"
 	"Pedrommb91/go-design-patterns/behavioral/memento"
+	"Pedrommb91/go-design-patterns/behavioral/observer"
 
 	"fmt"
 )
@@ -281,5 +282,23 @@ func main() {
 		editor.Restore(firstState)
 	}
 	fmt.Println(editor.GetContent()) // Output: First State
+
+	// Observer
+	weatherStation := observer.WeatherStation{}
+
+	tempDisplay := &observer.TemperatureDisplay{}
+	smartphoneApp := &observer.SmartphoneApp{}
+
+	weatherStation.RegisterObserver(tempDisplay)
+	weatherStation.RegisterObserver(smartphoneApp)
+
+	// Simulate temperature change
+	weatherStation.SetTemperature(25.3)
+
+	// Unregister the TemperatureDisplay
+	weatherStation.DeregisterObserver(tempDisplay)
+
+	// Simulate another temperature change
+	weatherStation.SetTemperature(30.5)
 
 }
