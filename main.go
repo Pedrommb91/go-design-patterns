@@ -21,6 +21,7 @@ import (
 	"Pedrommb91/go-design-patterns/behavioral/mediator"
 	"Pedrommb91/go-design-patterns/behavioral/memento"
 	"Pedrommb91/go-design-patterns/behavioral/observer"
+	"Pedrommb91/go-design-patterns/behavioral/state"
 
 	"fmt"
 )
@@ -301,4 +302,9 @@ func main() {
 	// Simulate another temperature change
 	weatherStation.SetTemperature(30.5)
 
+	// State
+	trafficLight := &state.TrafficLightContext{State: &state.RedLightState{}}
+	trafficLight.Change() // The traffic light is red and will change to green.
+	trafficLight.Change() // The traffic light is green and will change to yellow.
+	trafficLight.Change() // The traffic light is yellow and will change to red.
 }
