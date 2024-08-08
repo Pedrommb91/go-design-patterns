@@ -18,6 +18,7 @@ import (
 	"Pedrommb91/go-design-patterns/behavioral/command"
 	"Pedrommb91/go-design-patterns/behavioral/interpreter"
 	"Pedrommb91/go-design-patterns/behavioral/iterator"
+	"Pedrommb91/go-design-patterns/behavioral/mediator"
 
 	"fmt"
 )
@@ -228,6 +229,28 @@ func main() {
 	for it.HasNext() {
 		book := it.Next()
 		fmt.Printf("Book: %s, Author: %s\n", book.Title, book.Author)
+	}
+
+	// Mediator
+	controlTower := mediator.NewControlTower()
+	passengerPlane1 := mediator.NewPassengerPlane(controlTower, 1)
+	passengerPlane2 := mediator.NewPassengerPlane(controlTower, 2)
+
+	if passengerPlane1.Land() {
+		fmt.Println("Passenger Plane 1 has landed.")
+	} else {
+		fmt.Println("Passenger Plane 1 is waiting to land.")
+	}
+
+	if passengerPlane2.Land() {
+		fmt.Println("Passenger Plane 2 has landed.")
+	} else {
+		fmt.Println("Passenger Plane 2 is waiting to land.")
+	}
+
+	passengerPlane1.Takeoff()
+	if passengerPlane2.Land() {
+		fmt.Println("Passenger Plane 2 has landed.")
 	}
 
 }
