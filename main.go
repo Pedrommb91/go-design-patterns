@@ -23,6 +23,7 @@ import (
 	"Pedrommb91/go-design-patterns/behavioral/observer"
 	"Pedrommb91/go-design-patterns/behavioral/state"
 	"Pedrommb91/go-design-patterns/behavioral/strategy"
+	"Pedrommb91/go-design-patterns/behavioral/template"
 
 	"fmt"
 )
@@ -327,4 +328,8 @@ func main() {
 	}
 	shoppingCart.SetPaymentStrategy(payPalPayment)
 	fmt.Println(shoppingCart.Checkout(75.0))
+
+	// Template method
+	chess := &template.Chess{MaxTurns: 10}
+	template.PlayOneGame(chess)
 }
