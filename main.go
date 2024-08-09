@@ -24,6 +24,7 @@ import (
 	"Pedrommb91/go-design-patterns/behavioral/state"
 	"Pedrommb91/go-design-patterns/behavioral/strategy"
 	"Pedrommb91/go-design-patterns/behavioral/template"
+	"Pedrommb91/go-design-patterns/behavioral/visitor"
 
 	"fmt"
 )
@@ -332,4 +333,9 @@ func main() {
 	// Template method
 	chess := &template.Chess{MaxTurns: 10}
 	template.PlayOneGame(chess)
+
+	// Visitor
+	computer := visitor.NewComputer()
+	displayVisitor := &visitor.ComputerPartDisplayVisitor{}
+	computer.Accept(displayVisitor)
 }
